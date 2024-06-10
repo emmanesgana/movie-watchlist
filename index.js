@@ -63,7 +63,7 @@ function searchResultsHtml(info) {
             <div class="movie-info">
                 <div class="movie-data">
                     <h3 class="movie-title">${Title}</h2>
-                    <p class="rating">⭐ ${imdbRating}</p>
+                    <p class="rating"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> ${imdbRating}</p>
                 </div>
                 <div class="movie-details">
                     <p class="runtime">${Runtime}</p>

@@ -189,11 +189,11 @@ form button:hover {
 
 @media (min-width: 768px) {
     body{
-        max-width: 768px;
+        width: 768px;
     }
 
     .container-title {
-        height: 35vh;
+        height: 30vh;
     }
 
     .container-movie {

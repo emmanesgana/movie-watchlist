@@ -187,6 +187,28 @@ form button:hover {
     font-size: 0.875rem;
 }
 
+@media (max-width: 480px) {
+    .container-title{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 20vh;
+    }
+    .container-movie{
+        grid-template-columns: 1fr;
+    }
+
+    .poster {
+        margin: 0 auto;
+        width: 100px;
+        height: 100%;
+    }
+
+    form input {
+        width: 60vw;
+    }
+}
+
 @media (min-width: 768px) {
     body{
         width: 768px;

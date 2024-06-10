@@ -188,17 +188,12 @@ form button:hover {
 }
 
 @media (min-width: 768px) {
+    body{
+        max-width: 768px;
+    }
 
     .container-title {
         height: 35vh;
-    }
-
-    header h1 {
-        margin-left: 120px;
-    }
-    
-    header p {
-        margin-right: 120px;
     }
 
     .container-movie {

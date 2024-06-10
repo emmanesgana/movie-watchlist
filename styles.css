@@ -198,6 +198,11 @@ form button:hover {
         grid-template-columns: 1fr;
     }
 
+    .movie-data {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     .poster {
         margin: 0 auto;
         width: 100px;

@@ -203,6 +203,10 @@ form button:hover {
         align-items: flex-start;
     }
 
+    .movie-title {
+        font-size: 1.5rem;
+    }
+
     .poster {
         margin: 0 auto;
         width: 100px;

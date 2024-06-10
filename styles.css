@@ -18,6 +18,10 @@ p {
     margin-bottom: 0;
 }
 
+a{
+    text-decoration: none;
+}
+
 header {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/header-bg.png') no-repeat 85% 15%;
     background-size: cover;
@@ -37,9 +41,11 @@ header h1 {
     margin-left: 30px;
 }
 
-header p {
-    font-size: 0.875rem;
+header a {
+    font-size: 1rem;
     margin-right: 30px;
+    color: #fff;
+    font-weight: 500;
 }
 
 form {
@@ -66,11 +72,11 @@ form input {
     background: #F9FAFB url('assets/magnifying-glass-solid.svg') no-repeat 10px center;
     padding: .5em .5em .5em 2em;
     background-size: 20px 20px;
-    border-radius: 5px 0 0 5px;
+    border-radius: 8px 0 0 8px;
 }
 
 form button {
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 8px 8px 0;
     background-color: #F9FAFB;
     color: #374151;
     padding: .5em 1em .5em 1em;
@@ -135,7 +141,7 @@ form button:hover {
 .poster {
     width: 150px;
     height: 200px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .movie-info {
@@ -148,7 +154,7 @@ form button:hover {
     display: flex;
     align-items: center;
     gap: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 
 .movie-title {
@@ -164,7 +170,7 @@ form button:hover {
     display: flex;
     align-items: center;
     gap: 1.25em;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 
 .plot {
@@ -223,7 +229,7 @@ form button:hover {
         margin-left: 0;
     }
     
-    header p {
+    header a {
         margin: 0;
     }
 }

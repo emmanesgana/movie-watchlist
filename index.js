@@ -1,5 +1,5 @@
-let moviesArr = []
 let moviesHtml = ''
+let moviesArr = []
 let watchlistArr = []
 let watchlistLocalStorage = JSON.parse(localStorage.getItem('watchlist'))
 const searchInput = document.getElementById('search-input')
@@ -12,50 +12,47 @@ if (watchlistLocalStorage) {
     watchlistArr = watchlistLocalStorage
 }
 
-form.addEventListener('submit', async (e) => {
+form.addEventListener('submit', (e) => {
     e.preventDefault()
-    try {
-        let searchInputValue = searchInput.value
-        const res = await fetch(`https://www.omdbapi.com/?s=${searchInputValue}&type=movie&apikey=c83db659`)
-        const data = await res.json()
+    if (form) {
         moviesArr = []
-        moviesHtml = ''
-        for (let movies of data.Search) {
-            getMovies(movies.imdbID)
-        }
+        searchResults.innerHTML = ''
+        getMovies(searchInput.value)
+    }
+})
 
+async function getMovies(value) {
+    try {
+        moviesArr = []
+        searchResults.innerHTML = ''
+        const resValue = await fetch(`https://www.omdbapi.com/?s=${value}&type=movie&apikey=c83db659`)
+        const preData = await resValue.json()
+        for (let movies of preData.Search) {
+            // console.log('movie', movies)
+            const resImdbId = await fetch(`https://www.omdbapi.com/?i=${movies.imdbID}&type=movie&apikey=c83db659`)
+            const postData = await resImdbId.json()
+            moviesArr.push(postData)
+        }
+        renderSearchResults(moviesArr)
     } catch (err) {
         empty.style.display = 'none'
         renderFailedSearch()
     }
-
-})
-
-async function getMovies(imdbId) {
-    try {
-        const res = await fetch(`https://www.omdbapi.com/?i=${imdbId}&type=movie&apikey=c83db659`)
-        const data = await res.json()
-        moviesArr.push(data)
-        searchResultsHtml(data)
-        renderSearchResults()
-    } catch (err) {
-        alert('Error')
-    }
 }
 
-function searchResultsHtml(info) {
-    const {
-        Poster,
-        Title,
-        imdbRating,
-        Runtime,
-        Genre,
-        imdbID,
-        Plot
-    } = info
+function renderSearchResults(data) {
+    for (let movie of data) {
+        const {
+            Poster,
+            Title,
+            imdbRating,
+            Runtime,
+            Genre,
+            imdbID,
+            Plot
+        } = movie
 
-
-    moviesHtml += `
+        searchResults.innerHTML += `
         <div class="container-movie">
             <div class="poster">
                 <img src=${Poster}  alt="movie-poster" class="poster"> 
@@ -77,6 +74,7 @@ function searchResultsHtml(info) {
             </div>
         </div>
         `
+    }
 }
 
 function renderFailedSearch() {
@@ -85,8 +83,4 @@ function renderFailedSearch() {
             <h3>Unable to find what you&#39;re looking for. Please try another search.</h1>
         </div >
         `
-}
-
-function renderSearchResults() {
-    searchResults.innerHTML = moviesHtml
 }

@@ -1,25 +1,24 @@
 let moviesHtml = ''
 let moviesArr = []
 let watchlistArr = []
-let watchlistLocalStorage = JSON.parse(localStorage.getItem('watchlist'))
+let watchlistLocalStorage = JSON.parse(localStorage.getItem('watchlistArr'))
 const searchInput = document.getElementById('search-input')
 const searchButton = document.getElementById('search-button')
 const form = document.getElementById('form')
 const searchResults = document.getElementById('container-search-results')
+const watchList = document.getElementById('container-watchlist')
 const empty = document.getElementById('empty')
 
-if (watchlistLocalStorage) {
-    watchlistArr = watchlistLocalStorage
+if (!watchList) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        if (form) {
+            moviesArr = []
+            searchResults.innerHTML = ''
+            getMovies(searchInput.value)
+        }
+    })
 }
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    if (form) {
-        moviesArr = []
-        searchResults.innerHTML = ''
-        getMovies(searchInput.value)
-    }
-})
 
 async function getMovies(value) {
     try {
@@ -34,9 +33,28 @@ async function getMovies(value) {
             moviesArr.push(postData)
         }
         renderSearchResults(moviesArr)
+        addToWatchlist(moviesArr)
     } catch (err) {
         empty.style.display = 'none'
         renderFailedSearch()
+    }
+}
+
+function addToWatchlist(data) {
+    // add to watchlist
+    // console.log(data)
+    const watchListBtn = document.querySelectorAll('.watchlist-btn')
+    for (let i = 0; i < watchListBtn.length; i++) {
+        watchListBtn[i].addEventListener('click', (e) => {
+            e.preventDefault()
+            watchListBtn[i].innerHTML = `
+                <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
+                Saved
+            `
+            watchlistArr.unshift(data[i])
+            // console.log(watchlistArr)
+            localStorage.setItem('watchlistLocalStorage', JSON.stringify(watchlistArr))
+        })
     }
 }
 
@@ -65,7 +83,7 @@ function renderSearchResults(data) {
                 <div class="movie-details">
                     <p class="runtime">${Runtime}</p>
                     <p class="genre">${Genre}</p>
-                    <button class="add-remove-btn" data-id=${imdbID}>
+                    <button class="watchlist-btn">
                         <i class="fa-solid fa-circle-plus" style="color: #000000;"></i>
                         Watchlist
                     </button>
@@ -83,4 +101,13 @@ function renderFailedSearch() {
             <h3>Unable to find what you&#39;re looking for. Please try another search.</h1>
         </div >
         `
+}
+
+// watchlist
+if (watchlistLocalStorage) {
+    watchlistArr = watchlistLocalStorage
+}
+
+if (watchList) {
+
 }

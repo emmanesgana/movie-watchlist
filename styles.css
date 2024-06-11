@@ -193,6 +193,18 @@ form button:hover {
     font-size: 0.875rem;
 }
 
+.watchlist-empty{
+    font-weight: 700;
+    font-size: 1.5rem !important;
+    margin-bottom: .75em;
+}
+
+.watchlist-return{
+    text-decoration: none;
+    color: #363636;
+    font-size: 0.875rem;
+}
+
 @media (max-width: 480px) {
     .container-title{
         flex-direction: column;
@@ -207,6 +219,7 @@ form button:hover {
     .movie-data {
         flex-direction: column;
         align-items: flex-start;
+        gap: 0.35em;
     }
 
     .movie-title {

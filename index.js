@@ -51,7 +51,7 @@ function addToWatchlist(data) {
                 <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
                 Saved
             `
-            watchlistArr.unshift(data[i])
+            watchlistArr.push(data[i])
             // console.log(watchlistArr)
             localStorage.setItem('watchlistLocalStorage', JSON.stringify(watchlistArr))
         })

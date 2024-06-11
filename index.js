@@ -9,7 +9,9 @@ const searchResults = document.getElementById('container-search-results')
 const watchList = document.getElementById('container-watchlist')
 const empty = document.getElementById('empty')
 
-
+if (watchlistLocalStorage) {
+    watchlistArr = watchlistLocalStorage
+}
 
 // check if search page
 if (!watchList) {
@@ -38,8 +40,7 @@ async function getMovies(value) {
 
         const watchListBtn = document.querySelectorAll('.add')
         for (let i = 0; i < watchListBtn.length; i++) {
-            watchListBtn[i].addEventListener('click', (e) => {
-                e.preventDefault()
+            watchListBtn[i].addEventListener('click', () => {
                 watchListBtn[i].innerHTML = `
                 <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
                 Saved
@@ -103,49 +104,3 @@ function renderFailedSearch() {
         </div >
         `
 }
-
-// document.addEventListener('click', (e) => {
-//     const btnAdd = e.target.dataset.add
-//     if (btnAdd) {
-//         // console.log(moviesArr)
-//         console.log(btnAdd)
-//         addToWatchlist(btnAdd)
-//     }
-// })
-
-// function addToWatchlist(btnId) {
-//     const watchListBtn = document.querySelectorAll('.add')
-//     for (let movie of moviesArr) {
-//         watchListBtn.innerHTML = `
-//                 <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
-//                 Saved
-//             `
-//         console.log('fn arr:', movie)
-//         watchlistArr.push(data[i])
-//         localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
-//     }
-// }
-
-// function addToWatchlist(data) {
-//     const watchListBtn = document.querySelectorAll('.add')
-//     for (let i = 0; i < watchListBtn.length; i++) {
-//         watchListBtn[i].addEventListener('click', (e) => {
-//             e.preventDefault()
-//             watchListBtn[i].innerHTML = `
-//                 <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
-//                 Saved
-//             `
-//             watchListBtn[i].disabled = true
-//             watchlistArr.push(data[i])
-//             localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
-//         })
-//     }
-// }
-
-// function checkLocalStorage() {
-//     for (let item of watchlistLocalStorage) {
-//         console.log(item)
-//     }
-// }
-// checkLocalStorage()
-// console.log(watchlistLocalStorage[0].Title)

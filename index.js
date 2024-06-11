@@ -35,8 +35,20 @@ async function getMovies(value) {
             moviesArr.push(postData)
         }
         renderSearchResults(moviesArr)
-        addToWatchlist(moviesArr)
 
+        const watchListBtn = document.querySelectorAll('.add')
+        for (let i = 0; i < watchListBtn.length; i++) {
+            watchListBtn[i].addEventListener('click', (e) => {
+                e.preventDefault()
+                watchListBtn[i].innerHTML = `
+                <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
+                Saved
+            `
+                watchListBtn[i].disabled = true
+                watchlistArr.push(moviesArr[i])
+                localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
+            })
+        }
     } catch (err) {
         empty.style.display = 'none'
         renderFailedSearch()
@@ -92,24 +104,48 @@ function renderFailedSearch() {
         `
 }
 
-function addToWatchlist(data) {
-    const watchListBtn = document.querySelectorAll('.add')
-    for (let i = 0; i < watchListBtn.length; i++) {
-        watchListBtn[i].addEventListener('click', (e) => {
-            e.preventDefault()
-            watchListBtn[i].innerHTML = `
-                <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
-                Saved
-            `
-            watchListBtn[i].disabled = true
-            watchlistArr.push(data[i])
-            localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
-        })
-    }
-}
+// document.addEventListener('click', (e) => {
+//     const btnAdd = e.target.dataset.add
+//     if (btnAdd) {
+//         // console.log(moviesArr)
+//         console.log(btnAdd)
+//         addToWatchlist(btnAdd)
+//     }
+// })
 
-// function checkLocalStorage(){
-//     watchlistLocalStorage
+// function addToWatchlist(btnId) {
+//     const watchListBtn = document.querySelectorAll('.add')
+//     for (let movie of moviesArr) {
+//         watchListBtn.innerHTML = `
+//                 <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
+//                 Saved
+//             `
+//         console.log('fn arr:', movie)
+//         watchlistArr.push(data[i])
+//         localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
+//     }
 // }
 
+// function addToWatchlist(data) {
+//     const watchListBtn = document.querySelectorAll('.add')
+//     for (let i = 0; i < watchListBtn.length; i++) {
+//         watchListBtn[i].addEventListener('click', (e) => {
+//             e.preventDefault()
+//             watchListBtn[i].innerHTML = `
+//                 <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
+//                 Saved
+//             `
+//             watchListBtn[i].disabled = true
+//             watchlistArr.push(data[i])
+//             localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
+//         })
+//     }
+// }
+
+// function checkLocalStorage() {
+//     for (let item of watchlistLocalStorage) {
+//         console.log(item)
+//     }
+// }
+// checkLocalStorage()
 // console.log(watchlistLocalStorage[0].Title)

@@ -1,7 +1,7 @@
 let moviesHtml = ''
 let moviesArr = []
 let watchlistArr = []
-let watchlistLocalStorage = JSON.parse(localStorage.getItem('watchlistArr'))
+let watchlistLocalStorage = localStorage.getItem('watchlistArr') ? JSON.parse(localStorage.getItem('watchlistArr')) : []
 const watchList = document.getElementById('container-watchlist')
 
 if (watchlistLocalStorage) {
@@ -24,7 +24,7 @@ if (watchList) {
 
 document.addEventListener('click', (e) => {
     const btnRemove = e.target.dataset.remove
-    if (btnRemove) {
+    if (e.target.dataset.remove) {
         watchList.innerHTML = ''
         removeFromWatchList(btnRemove)
     }

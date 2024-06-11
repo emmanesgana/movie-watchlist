@@ -9,6 +9,9 @@ const searchResults = document.getElementById('container-search-results')
 const watchList = document.getElementById('container-watchlist')
 const empty = document.getElementById('empty')
 
+
+
+// check if search page
 if (!watchList) {
     form.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -33,6 +36,7 @@ async function getMovies(value) {
         }
         renderSearchResults(moviesArr)
         addToWatchlist(moviesArr)
+
     } catch (err) {
         empty.style.display = 'none'
         renderFailedSearch()
@@ -66,7 +70,7 @@ function renderSearchResults(data) {
                         <p class="runtime">${Runtime}</p>
                         <p class="genre">${Genre}</p>
                         <div id="btn">
-                        <button class="watchlist-btn">
+                        <button class="watchlist-btn add" data-add=${imdbID}>
                             <i class="fa-solid fa-circle-plus" style="color: #000000;"></i>
                             Watchlist
                         </button>
@@ -89,11 +93,10 @@ function renderFailedSearch() {
 }
 
 function addToWatchlist(data) {
-    const watchListBtn = document.querySelectorAll('.watchlist-btn')
+    const watchListBtn = document.querySelectorAll('.add')
     for (let i = 0; i < watchListBtn.length; i++) {
         watchListBtn[i].addEventListener('click', (e) => {
             e.preventDefault()
-            // if()
             watchListBtn[i].innerHTML = `
                 <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
                 Saved
@@ -105,57 +108,8 @@ function addToWatchlist(data) {
     }
 }
 
-// watchlist 
-if (watchlistLocalStorage) {
-    watchlistArr = watchlistLocalStorage
-}
+// function checkLocalStorage(){
+//     watchlistLocalStorage
+// }
 
-if (watchList) {
-    if (watchlistArr.length > 0) {
-        renderWatchlist(watchlistArr)
-    } else {
-        watchList.innerHTML = `
-            <div class="container-empty" id="empty">
-                <p class="watchlist-empty">Your watchlist is a little empty</p>
-                <a href="./index.html" class="watchlist-return"><i class="fa-solid fa-circle-plus" style="color: #000000;"></i> Let's add some movies!</a>
-            </div>
-        `
-    }
-}
-
-function renderWatchlist(data) {
-    for (let movie of data) {
-        const {
-            Poster,
-            Title,
-            imdbRating,
-            Runtime,
-            Genre,
-            imdbID,
-            Plot
-        } = movie
-
-        watchList.innerHTML += `
-        <div class="container-movie">
-            <div class="poster">
-                <img src=${Poster}  alt="movie-poster" class="poster"> 
-            </div>
-            <div class="movie-info">
-                <div class="movie-data">
-                    <h3 class="movie-title">${Title}</h2>
-                    <p class="rating"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> ${imdbRating}</p>
-                </div>
-                <div class="movie-details">
-                    <p class="runtime">${Runtime}</p>
-                    <p class="genre">${Genre}</p>
-                    <button class="watchlist-btn">
-                        <i class="fa-solid fa-circle-minus" style="color: #000000;"></i>
-                        Remove
-                    </button>
-                </div>
-                <p class="plot">${Plot}</p>
-            </div>
-        </div>
-        `
-    }
-}
+// console.log(watchlistLocalStorage[0].Title)

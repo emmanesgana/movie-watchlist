@@ -48,6 +48,7 @@ async function getMovies(value) {
                     <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
                     Saved
                 `
+                console.log(movieId)
                 watchListBtn[i].disabled = true
                 addId.push(movieId)
                 watchlistArr.push(moviesArr[i])
@@ -74,6 +75,9 @@ function renderSearchResults(data) {
             imdbID,
             Plot
         } = movie
+        console.log(addId)
+        console.log(imdbID)
+        console.log(addId.includes(imdbID))
         if (addId.includes(imdbID)) {
             searchResults.innerHTML += `
             <div class="container-movie">
@@ -89,10 +93,10 @@ function renderSearchResults(data) {
                         <p class="runtime">${Runtime}</p>
                         <p class="genre">${Genre}</p>
                         <div id="btn">
-                        <span class="saved">
-                            <i class="fa-solid fa-circle-check" style="color: #0ee957;"></i>
+                        <button class="watchlist-btn add" data-add=${imdbID} disabled>
+                            <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
                             Saved
-                        </span >
+                        </button>
                         </div>
                         
                     </div>

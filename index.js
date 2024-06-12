@@ -44,20 +44,15 @@ async function getMovies(value) {
         for (let i = 0; i < watchListBtn.length; i++) {
             watchListBtn[i].addEventListener('click', (e) => {
                 const movieId = e.target.dataset.add
-                if (addId.includes(movieId)) {
-                    alert('Already added to the you watchlist.')
-                } else {
-                    watchListBtn[i].innerHTML = `
+                watchListBtn[i].innerHTML = `
                     <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
                     Saved
                 `
-                    watchListBtn[i].disabled = true
-                    addId.push(movieId)
-                    watchlistArr.push(moviesArr[i])
-                    localStorage.setItem('idToStorage', JSON.stringify(addId))
-                    localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
-                }
-
+                watchListBtn[i].disabled = true
+                addId.push(movieId)
+                watchlistArr.push(moviesArr[i])
+                localStorage.setItem('idToStorage', JSON.stringify(addId))
+                localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
             })
         }
     } catch (err) {
@@ -79,8 +74,34 @@ function renderSearchResults(data) {
             imdbID,
             Plot
         } = movie
-
-        searchResults.innerHTML += `
+        if (addId.includes(imdbID)) {
+            searchResults.innerHTML += `
+            <div class="container-movie">
+                <div class="poster">
+                    <img src=${Poster}  alt="movie-poster" class="poster"> 
+                </div>
+                <div class="movie-info">
+                    <div class="movie-data">
+                        <h3 class="movie-title">${Title}</h2>
+                        <p class="rating"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> ${imdbRating}</p>
+                    </div>
+                    <div class="movie-details">
+                        <p class="runtime">${Runtime}</p>
+                        <p class="genre">${Genre}</p>
+                        <div id="btn">
+                        <button class="watchlist-btn add" data-add=${imdbID} disabled>
+                            <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
+                            Saved
+                        </button>
+                        </div>
+                        
+                    </div>
+                    <p class="plot">${Plot}</p>
+                </div>
+            </div>
+            `
+        } else {
+            searchResults.innerHTML += `
             <div class="container-movie">
                 <div class="poster">
                     <img src=${Poster}  alt="movie-poster" class="poster"> 
@@ -105,6 +126,7 @@ function renderSearchResults(data) {
                 </div>
             </div>
             `
+        }
     }
 }
 

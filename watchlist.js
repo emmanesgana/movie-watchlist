@@ -1,7 +1,7 @@
 let moviesHtml = ''
 let moviesArr = []
 let watchlistArr = []
-let watchlistLocalStorage = localStorage.getItem('watchlistArr') ? JSON.parse(localStorage.getItem('watchlistArr')) : []
+let watchlistLocalStorage = JSON.parse(localStorage.getItem('watchlistArr'))
 let idToStorage = localStorage.getItem('idToStorage')
 let addId = idToStorage ? JSON.parse(idToStorage) : []
 const watchList = document.getElementById('container-watchlist')

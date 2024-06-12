@@ -74,34 +74,8 @@ function renderSearchResults(data) {
             imdbID,
             Plot
         } = movie
-        if (addId.includes(imdbID)) {
-            searchResults.innerHTML += `
-            <div class="container-movie">
-                <div class="poster">
-                    <img src=${Poster}  alt="movie-poster" class="poster"> 
-                </div>
-                <div class="movie-info">
-                    <div class="movie-data">
-                        <h3 class="movie-title">${Title}</h2>
-                        <p class="rating"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> ${imdbRating}</p>
-                    </div>
-                    <div class="movie-details">
-                        <p class="runtime">${Runtime}</p>
-                        <p class="genre">${Genre}</p>
-                        <div id="btn">
-                        <button class="watchlist-btn add" data-add=${imdbID} disabled>
-                            <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
-                            Saved
-                        </button>
-                        </div>
-                        
-                    </div>
-                    <p class="plot">${Plot}</p>
-                </div>
-            </div>
-            `
-        } else {
-            searchResults.innerHTML += `
+        const changeIcon = addId.includes(imdbID) ? 'fa-circle-minus' : 'fa-circle-plus'
+        searchResults.innerHTML += `
             <div class="container-movie">
                 <div class="poster">
                     <img src=${Poster}  alt="movie-poster" class="poster"> 
@@ -116,7 +90,7 @@ function renderSearchResults(data) {
                         <p class="genre">${Genre}</p>
                         <div id="btn">
                         <button class="watchlist-btn add" data-add=${imdbID}>
-                            <i class="fa-solid fa-circle-plus" style="color: #000000;"></i>
+                            <i class="fa-solid ${changeIcon}" style="color: #000000;"></i>
                             Watchlist
                         </button>
                         </div>
@@ -126,7 +100,6 @@ function renderSearchResults(data) {
                 </div>
             </div>
             `
-        }
     }
 }
 

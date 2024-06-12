@@ -1,6 +1,6 @@
 # Live Demo
 
-[Movie Watchlist](https://nuutri-movie-watchlist.netlify.app/))]
+[Movie Watchlist](https://nuutri-movie-watchlist.netlify.app/)
 
 ## Description
 

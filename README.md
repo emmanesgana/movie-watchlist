@@ -3,6 +3,8 @@
 [Movie Watchlist](https://nuutri-movie-watchlist.netlify.app/))]
 
 ## Description
+
+A scrimba solo project.
 https://www.omdbapi.com/
 
 ## Preview

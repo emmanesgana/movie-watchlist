@@ -1,6 +1,6 @@
 # Live Demo
 
-[[Color Scheme Generator](https://nuutri-color-generator.netlify.app/)](https://nuutri-movie-watchlist.netlify.app/)
+[[Movie Watchlist]([https://nuutri-color-generator.netlify.app/](https://nuutri-movie-watchlist.netlify.app/))]
 
 ## Description
 https://www.omdbapi.com/

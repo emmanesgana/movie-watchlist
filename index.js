@@ -44,15 +44,20 @@ async function getMovies(value) {
         for (let i = 0; i < watchListBtn.length; i++) {
             watchListBtn[i].addEventListener('click', (e) => {
                 const movieId = e.target.dataset.add
-                watchListBtn[i].innerHTML = `
+                if (addId.includes(movieId)) {
+                    alert('Already added to the you watchlist.')
+                } else {
+                    watchListBtn[i].innerHTML = `
                     <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
                     Saved
                 `
-                watchListBtn[i].disabled = true
-                addId.push(movieId)
-                watchlistArr.push(moviesArr[i])
-                localStorage.setItem('idToStorage', JSON.stringify(addId))
-                localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
+                    watchListBtn[i].disabled = true
+                    addId.push(movieId)
+                    watchlistArr.push(moviesArr[i])
+                    localStorage.setItem('idToStorage', JSON.stringify(addId))
+                    localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
+                }
+
             })
         }
     } catch (err) {
@@ -74,7 +79,7 @@ function renderSearchResults(data) {
             imdbID,
             Plot
         } = movie
-        const changeIcon = addId.includes(imdbID) ? 'fa-circle-minus' : 'fa-circle-plus'
+
         searchResults.innerHTML += `
             <div class="container-movie">
                 <div class="poster">
@@ -90,7 +95,7 @@ function renderSearchResults(data) {
                         <p class="genre">${Genre}</p>
                         <div id="btn">
                         <button class="watchlist-btn add" data-add=${imdbID}>
-                            <i class="fa-solid ${changeIcon}" style="color: #000000;"></i>
+                            <i class="fa-solid fa-circle-plus" style="color: #000000;"></i>
                             Watchlist
                         </button>
                         </div>

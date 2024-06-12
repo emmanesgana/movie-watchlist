@@ -2,6 +2,8 @@ let moviesHtml = ''
 let moviesArr = []
 let watchlistArr = []
 let watchlistLocalStorage = JSON.parse(localStorage.getItem('watchlistArr'))
+let idToStorage = localStorage.getItem('idToStorage')
+let addId = idToStorage ? JSON.parse(idToStorage) : []
 const searchInput = document.getElementById('search-input')
 const searchButton = document.getElementById('search-button')
 const form = document.getElementById('form')
@@ -41,12 +43,15 @@ async function getMovies(value) {
         const watchListBtn = document.querySelectorAll('.add')
         for (let i = 0; i < watchListBtn.length; i++) {
             watchListBtn[i].addEventListener('click', (e) => {
+                const movieId = e.target.dataset.add
                 watchListBtn[i].innerHTML = `
-                <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
-                Saved
-            `
+                    <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
+                    Saved
+                `
                 watchListBtn[i].disabled = true
+                addId.push(movieId)
                 watchlistArr.push(moviesArr[i])
+                localStorage.setItem('idToStorage', JSON.stringify(addId))
                 localStorage.setItem('watchlistArr', JSON.stringify(watchlistArr))
             })
         }
@@ -57,6 +62,7 @@ async function getMovies(value) {
 }
 
 function renderSearchResults(data) {
+
     for (let movie of data) {
 
         const {
@@ -69,7 +75,34 @@ function renderSearchResults(data) {
             Plot
         } = movie
 
-        searchResults.innerHTML += `
+        if (addId.includes(imdbID)) {
+            searchResults.innerHTML += `
+            <div class="container-movie">
+                <div class="poster">
+                    <img src=${Poster}  alt="movie-poster" class="poster"> 
+                </div>
+                <div class="movie-info">
+                    <div class="movie-data">
+                        <h3 class="movie-title">${Title}</h2>
+                        <p class="rating"><i class="fa-solid fa-star" style="color: #FFD43B;"></i> ${imdbRating}</p>
+                    </div>
+                    <div class="movie-details">
+                        <p class="runtime">${Runtime}</p>
+                        <p class="genre">${Genre}</p>
+                        <div id="btn">
+                        <button class="watchlist-btn add" data-add=${imdbID}>
+                            <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
+                            Saved
+                        </button>
+                        </div>
+                        
+                    </div>
+                    <p class="plot">${Plot}</p>
+                </div>
+            </div>
+            `
+        } else {
+            searchResults.innerHTML += `
             <div class="container-movie">
                 <div class="poster">
                     <img src=${Poster}  alt="movie-poster" class="poster"> 
@@ -94,6 +127,7 @@ function renderSearchResults(data) {
                 </div>
             </div>
             `
+        }
     }
 }
 

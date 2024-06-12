@@ -2,6 +2,8 @@ let moviesHtml = ''
 let moviesArr = []
 let watchlistArr = []
 let watchlistLocalStorage = localStorage.getItem('watchlistArr') ? JSON.parse(localStorage.getItem('watchlistArr')) : []
+let idToStorage = localStorage.getItem('idToStorage')
+let addId = idToStorage ? JSON.parse(idToStorage) : []
 const watchList = document.getElementById('container-watchlist')
 
 if (watchlistLocalStorage) {
@@ -12,11 +14,10 @@ renderWatchlist(watchlistArr)
 
 document.addEventListener('click', (e) => {
     const btnRemove = e.target.dataset.remove
-    if (e.target.dataset.remove) {
+    let filtered = addId.filter(mov => btnRemove !== mov)
+    if (btnRemove) {
         removeFromWatchList(btnRemove)
-        console.log(watchlistArr.length)
-    } else if (watchlistArr.length < -1) {
-        console.log('test')
+        localStorage.setItem('idToStorage', JSON.stringify(filtered))
     }
 })
 
@@ -70,7 +71,6 @@ function renderWatchlist(data) {
         }
 
     } else {
-        console.log('fin')
         renderEmpty()
     }
 }

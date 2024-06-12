@@ -5,10 +5,10 @@
 ## Preview
 
 - Home
-[![alt text](https://github.com/emmanesgana/color-scheme-generator/blob/main/preview/preview.png)](https://github.com/emmanesgana/movie-watchlist/blob/main/preview/desktop-home.png)
+![alt text](https://github.com/emmanesgana/movie-watchlist/blob/main/preview/desktop-home.png)
 
 - Watchlist
-![alt text]([https://github.com/emmanesgana/color-scheme-generator/blob/main/preview/preview.png](https://github.com/emmanesgana/movie-watchlist/blob/main/preview/desktop-watchlist.png))
+![alt text](https://github.com/emmanesgana/movie-watchlist/blob/main/preview/desktop-watchlist.png))
 
 - Mobile View
-![alt text]([https://github.com/emmanesgana/color-scheme-generator/blob/main/preview/preview.png](https://github.com/emmanesgana/movie-watchlist/blob/main/preview/mobile-view.png))
+![alt text](https://github.com/emmanesgana/movie-watchlist/blob/main/preview/mobile-view.png))

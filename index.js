@@ -74,7 +74,6 @@ function renderSearchResults(data) {
             imdbID,
             Plot
         } = movie
-
         if (addId.includes(imdbID)) {
             searchResults.innerHTML += `
             <div class="container-movie">
@@ -90,10 +89,10 @@ function renderSearchResults(data) {
                         <p class="runtime">${Runtime}</p>
                         <p class="genre">${Genre}</p>
                         <div id="btn">
-                        <button class="watchlist-btn add" data-add=${imdbID}>
-                            <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
+                        <span class="saved">
+                            <i class="fa-solid fa-circle-check" style="color: #0ee957;"></i>
                             Saved
-                        </button>
+                        </span >
                         </div>
                         
                     </div>

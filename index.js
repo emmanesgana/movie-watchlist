@@ -40,7 +40,7 @@ async function getMovies(value) {
 
         const watchListBtn = document.querySelectorAll('.add')
         for (let i = 0; i < watchListBtn.length; i++) {
-            watchListBtn[i].addEventListener('click', () => {
+            watchListBtn[i].addEventListener('click', (e) => {
                 watchListBtn[i].innerHTML = `
                 <i class="fa-solid fa-circle-check" style="color: #26a269;"></i>
                 Saved

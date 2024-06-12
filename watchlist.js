@@ -8,29 +8,20 @@ if (watchlistLocalStorage) {
     watchlistArr = watchlistLocalStorage
 }
 
-if (watchList) {
-    if (watchlistArr.length > 0) {
-        renderWatchlist(watchlistArr)
-
-    } else {
-        watchList.innerHTML = `
-            <div class="container-empty" id="empty">
-                <p class="watchlist-empty">Your watchlist is a little empty</p>
-                <a href="./index.html" class="watchlist-return"><i class="fa-solid fa-circle-plus" style="color: #000000;"></i> Let's add some movies!</a>
-            </div>
-        `
-    }
-}
+renderWatchlist(watchlistArr)
 
 document.addEventListener('click', (e) => {
     const btnRemove = e.target.dataset.remove
     if (e.target.dataset.remove) {
-        watchList.innerHTML = ''
         removeFromWatchList(btnRemove)
+        console.log(watchlistArr.length)
+    } else if (watchlistArr.length < -1) {
+        console.log('test')
     }
 })
 
 function removeFromWatchList(btnId) {
+    watchList.innerHTML = ''
     for (let movie of watchlistArr) {
         if (btnId === movie.imdbID) {
             let movieIndex = watchlistArr.indexOf(movie)
@@ -42,18 +33,19 @@ function removeFromWatchList(btnId) {
 }
 
 function renderWatchlist(data) {
-    for (let movie of data) {
-        const {
-            Poster,
-            Title,
-            imdbRating,
-            Runtime,
-            Genre,
-            imdbID,
-            Plot
-        } = movie
+    if (watchlistArr.length > 0) {
+        for (let movie of data) {
+            const {
+                Poster,
+                Title,
+                imdbRating,
+                Runtime,
+                Genre,
+                imdbID,
+                Plot
+            } = movie
 
-        watchList.innerHTML += `
+            watchList.innerHTML += `
         <div class="container-movie" id="container-movie">
             <div class="poster">
                 <img src=${Poster}  alt="movie-poster" class="poster"> 
@@ -75,5 +67,19 @@ function renderWatchlist(data) {
             </div>
         </div>
         `
+        }
+
+    } else {
+        console.log('fin')
+        renderEmpty()
     }
+}
+
+function renderEmpty() {
+    watchList.innerHTML = `
+            <div class="container-empty" id="empty">
+                <p class="watchlist-empty">Your watchlist is a little empty</p>
+                <a href="./index.html" class="watchlist-return"><i class="fa-solid fa-circle-plus" style="color: #000000;"></i> Let's add some movies!</a>
+            </div>
+        `
 }

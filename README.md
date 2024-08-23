@@ -4,8 +4,13 @@
 
 ## Description
 
-A scrimba solo project.
-https://www.omdbapi.com/
+This project was made to practice API calls to [OMDB API](https://www.omdbapi.com/) using Asynchronus Javascript.
+
+### Feaatures
+
+- Ability to search through thousands of movies using OMDb API
+- Can add and remove movies to your watchlist
+- Stores data to your local storage
 
 ## Preview
 
